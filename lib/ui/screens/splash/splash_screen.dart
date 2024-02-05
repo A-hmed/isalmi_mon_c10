@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isalmi_mon_c10/ui/screens/home/home_screen.dart';
+import 'package:isalmi_mon_c10/ui/utils/app_assets.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "splash_screen";
@@ -14,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    print("Init state");
     Future.delayed(Duration(seconds: 2), (){
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     });
@@ -22,9 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
+
     return Scaffold(
-      body: Image.asset("assets/images/splash.png"),
+      body: Image.asset(AppAssets.splash),
     );
   }
 }
