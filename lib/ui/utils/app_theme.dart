@@ -16,6 +16,6 @@ abstract class AppTheme{
   static const TextStyle regularTitleTextStyle = TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.w400,
-      color: AppColors.lightBlack
+      color: AppColors.lightBlack,
   );
 }

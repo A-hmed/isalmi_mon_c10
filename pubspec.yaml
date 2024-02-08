@@ -23,3 +23,5 @@ flutter:
 
   assets:
      - assets/images/
+     - assets/files/quran/
+     - assets/files/ahadeth/
