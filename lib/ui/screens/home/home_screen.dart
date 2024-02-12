@@ -3,9 +3,12 @@ import 'package:isalmi_mon_c10/ui/screens/home/tabs/ahadeth/ahadeth_tab.dart';
 import 'package:isalmi_mon_c10/ui/screens/home/tabs/quran/quran_tab.dart';
 import 'package:isalmi_mon_c10/ui/screens/home/tabs/radio/radio_tab.dart';
 import 'package:isalmi_mon_c10/ui/screens/home/tabs/sebha/sebha_tab.dart';
+import 'package:isalmi_mon_c10/ui/screens/home/tabs/settings/settings_tab.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_assets.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_colors.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:isalmi_mon_c10/ui/utils/build_context_extension.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home_screen";
@@ -17,11 +20,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late AppLocalizations l10n;
   int currentTabIndex = 0;
-  List<Widget> tabs = [const QuranTab(), const AhadethTab(), const SebhaTab(), const RadioTab()];
+  List<Widget> tabs = [
+    const QuranTab(),
+    const AhadethTab(),
+    const SebhaTab(),
+    const RadioTab(),
+    const SettingsTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    l10n = context.l10n;
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(image: AssetImage(AppAssets.background))),
@@ -34,9 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar buildAppBar() => AppBar(
-        title: const Text(
-          "Islami",
+  AppBar buildAppBar() =>
+      AppBar(
+        title: Text(
+          l10n.islami,
           style: AppTheme.appBarTextStyle,
         ),
         centerTitle: true,
@@ -44,14 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: AppColors.transparent,
       );
 
-  Widget buildBottomNav() => Theme(
+  Widget buildBottomNav() =>
+      Theme(
         data: ThemeData(canvasColor: AppColors.orange),
         child: BottomNavigationBar(
           items: [
-            buildBottomNavigationBarItem(AppAssets.icQuran, "quran"),
-            buildBottomNavigationBarItem(AppAssets.icAhadeth, "ahadeth"),
-            buildBottomNavigationBarItem(AppAssets.icSebha, "sebha"),
-            buildBottomNavigationBarItem(AppAssets.icRadio, "radio"),
+            buildBottomNavigationBarItem(l10n.quran,iconPath: AppAssets.icQuran, ),
+            buildBottomNavigationBarItem(l10n.ahadeth, iconPath:AppAssets.icAhadeth),
+            buildBottomNavigationBarItem(l10n.sebha, iconPath: AppAssets.icSebha),
+            buildBottomNavigationBarItem(l10n.radio, iconPath: AppAssets.icRadio),
+            buildBottomNavigationBarItem("Settings", iconData: Icons.settings_rounded),
           ],
           selectedItemColor: AppColors.lightBlack,
           iconSize: 34,
@@ -63,8 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
 
-  BottomNavigationBarItem buildBottomNavigationBarItem(
-          String iconPath, String label) =>
+  BottomNavigationBarItem buildBottomNavigationBarItem(String label,
+      {String? iconPath, IconData? iconData}) =>
       BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(iconPath)), label: label);
+          icon: iconPath != null ?
+          ImageIcon(AssetImage(iconPath))
+              : Icon(iconData!), label: label);
 }

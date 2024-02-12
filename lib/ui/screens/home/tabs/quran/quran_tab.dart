@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:isalmi_mon_c10/model/sura_details_args.dart';
+import 'package:isalmi_mon_c10/ui/screens/home/home_screen.dart';
 import 'package:isalmi_mon_c10/ui/screens/sura_details/sura_details.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_assets.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_colors.dart';
 import 'package:isalmi_mon_c10/ui/utils/app_theme.dart';
+import 'package:isalmi_mon_c10/ui/utils/build_context_extension.dart';
 import 'package:isalmi_mon_c10/ui/utils/constants.dart';
 
 class QuranTab extends StatelessWidget {
@@ -20,7 +22,7 @@ class QuranTab extends StatelessWidget {
          child: Stack(
            alignment: Alignment.center,
            children: [
-             buildTabContent(),
+             buildTabContent(context),
              Container(
                width: 3,
                color: AppColors.orange,
@@ -34,7 +36,7 @@ class QuranTab extends StatelessWidget {
     );
   }
 
-  Widget buildTabContent() {
+  Widget buildTabContent(BuildContext context) {
     return Column(
       children: [
         Container(
@@ -43,11 +45,11 @@ class QuranTab extends StatelessWidget {
           color: AppColors.orange,
         ),
         const SizedBox(height: 4,),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(child: Text("Sura Name", textAlign: TextAlign.center, style: AppTheme.mediumTitleTextStyle,)),
-            Expanded(child: Text("Verses", textAlign: TextAlign.center, style: AppTheme.mediumTitleTextStyle)),
+            Expanded(child: Text(context.l10n.suraName, textAlign: TextAlign.center, style: AppTheme.mediumTitleTextStyle,)),
+            Expanded(child: Text(context.l10n.verses, textAlign: TextAlign.center, style: AppTheme.mediumTitleTextStyle)),
           ],
         ),
         const SizedBox(height: 4,),
